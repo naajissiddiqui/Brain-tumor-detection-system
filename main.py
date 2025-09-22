@@ -33,7 +33,10 @@ def predict_tumor(image_path):
     predicted_class_index = np.argmax(prediction, axis=1)[0]
     confidence_score = np.max(prediction, axis=1)[0]
 
-    return class_labels[predicted_class], confidence
+    if class_labels[predicted_class_index] == 'notumor':
+        result = "No Tumor Detected", confidence_score
+    else: 
+        return f"Tumor: {class_labels[predicted_class_index]}", confidence_score
 
 # Routes
 @app.route("/", methods=['GET', 'POST'])
@@ -49,5 +52,7 @@ def index():
             # predict results 
             result, confidence = predict_tumor(file_location)
 
-
+            # return results along with the image path for display
+            return render_template('index.html', result=result, confidence=f'{confidence*100:.2f  }', file_path=f'uploads/{file.filename}')
     
+    return  render_template('index.html', result=None)
