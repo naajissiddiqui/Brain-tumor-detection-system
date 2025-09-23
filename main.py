@@ -56,3 +56,7 @@ def index():
             return render_template('index.html', result=result, confidence=f'{confidence*100:.2f  }', file_path=f'uploads/{file.filename}')
     
     return  render_template('index.html', result=None)
+
+# python main
+if __name__ =='main':
+    app.run(debug=True)
