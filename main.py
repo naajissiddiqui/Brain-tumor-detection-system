@@ -58,5 +58,5 @@ def index():
     return  render_template('index.html', result=None)
 
 # python main
-if __name__ =='main':
-    app.run(debug=True)
+# if __name__ =='main':
+  #  app.run(debug=True)
